@@ -1,0 +1,56 @@
+// 1 26 classwork.cpp : Defines the entry point for the console application.
+// Martin Bassett
+// 2/13/2023
+// Dice Project
+
+#include "stdafx.h"
+#include <iostream>
+#include "die.h"
+#include <iomanip>
+#include <vector>
+using namespace std;
+
+int _tmain(int argc, _TCHAR* argv[])
+{
+	// Variables
+	int rolls, diceSum;
+	double percentage;
+	die dice;
+	vector<int> nums(11, 0);
+
+	// Get the amount of rolls
+	cout << "How many times would you like to roll the dice? ";
+	cin >> rolls;
+
+	// Outputs
+	cout << endl << "Based on rolling the dice " << rolls << " times, the following resulted:" << endl << endl;
+	cout << "Frequency %'s of rolls:" << endl << endl;
+	cout << fixed << showpoint << setprecision(2) << setw(10);
+	cout << "Roll:	Percent:" << endl;
+
+	// Roll however many times the user wants
+	// Then store in vector
+	for (int x = 0; x < rolls; x++)
+	{
+		diceSum = 0;
+		dice.roll();
+		diceSum += dice.getPosition();
+		dice.roll();
+		diceSum += dice.getPosition();
+		nums[diceSum - 2]++;
+	}
+
+	// Loop through the vector and find the percentages
+	// Output final data
+	for (int x = 0; x < nums.size(); x++)
+	{
+		cout << fixed << showpoint << setprecision(1);
+		cout << x + 2 <<"	";
+		percentage = ((nums[x] / (double)rolls)) * 100;
+		cout << percentage << "%" << endl;
+	}
+
+	cout << endl;
+	system("Pause");
+	return 0;
+}
