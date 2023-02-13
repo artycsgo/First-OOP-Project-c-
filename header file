@@ -1,0 +1,12 @@
+#pragma once
+class die
+{
+public:
+	die(void);
+	~die(void);
+	void roll();
+	int getPosition();
+private:
+	int position;
+	int sides;
+};
